@@ -1,4 +1,4 @@
-package entities
+package br.com.jm.data.entities
 
 data class Pokemon(
     val abilities: List<Ability>,

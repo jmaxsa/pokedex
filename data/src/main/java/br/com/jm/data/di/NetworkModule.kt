@@ -1,4 +1,4 @@
-package di
+package br.com.jm.data.di
 
 import dagger.Provides
 import dagger.hilt.InstallIn
