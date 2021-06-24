@@ -8,6 +8,7 @@ import br.com.jm.domain.entities.Pokemon
 import br.com.jm.domain.usecase.GetPokemonUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import java.lang.Exception
 import javax.inject.Inject
 
 @HiltViewModel
@@ -16,7 +17,13 @@ class HomeViewModel @Inject constructor(
 ): ViewModel() {
     fun getPokemon(pokemonName: String) {
         viewModelScope.launch {
-            when(val pokemon = getPokemonUseCase.invoke(pokemonName)) {
+            val pokemon = try {
+                getPokemonUseCase.invoke(pokemonName)
+            } catch (e: Exception) {
+                Result.Error(Exception(e.cause))
+            }
+
+            when(pokemon) {
                 is Result.Success<Pokemon> -> { Log.i("Pokemon Name: ", pokemon.data.name) }
                 is Result.Error -> { Log.i("ERRROR", pokemon.exception.message.toString()) }
             }
