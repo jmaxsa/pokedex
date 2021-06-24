@@ -65,4 +65,7 @@ ext {
     //DI
     hilt_version = '2.37'
 
+    //Navigation
+    nav_version = "2.3.5"
+
 }

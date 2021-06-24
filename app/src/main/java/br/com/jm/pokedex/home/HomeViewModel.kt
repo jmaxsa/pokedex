@@ -18,7 +18,7 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             when(val pokemon = getPokemonUseCase.invoke(pokemonName)) {
                 is Result.Success<Pokemon> -> { Log.i("Pokemon Name: ", pokemon.data.name) }
-                else -> {}
+                is Result.Error -> { Log.i("ERRROR", pokemon.exception.message.toString()) }
             }
         }
     }
